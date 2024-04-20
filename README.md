@@ -51,5 +51,6 @@ npm install && npm start
 ```bash
 python -m pip install django-cors-headers
 ```
+![image](https://github.com/rozdemir96/baykar-project/assets/92824318/5756364d-c9fa-4364-8a51-efd273dd0ede)
 
 
