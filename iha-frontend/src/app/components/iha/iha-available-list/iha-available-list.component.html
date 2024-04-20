@@ -1,0 +1,66 @@
+<div class="container-fluid">
+  <div class="row py-5">
+    <div class="col-12">
+      <div class="d-flex justify-content-end mb-2">
+        <button class="btn btn-primary" (click)="createIha()">IHA ekle</button>
+      </div>
+      <p-table [value]="availableIhaList" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Brand</th>
+            <th>Model</th>
+            <th>Weight</th>
+            <th>Category</th>
+            <th>Max Flight Time</th>
+            <th>Max Range</th>
+            <th>Battery Capacity</th>
+            <th *ngIf="rentalList?.length">Date</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-iha>
+          <tr>
+            <td>{{ iha?.brand }}</td>
+            <td>{{ iha?.model }}</td>
+            <td>{{ iha?.weight }}</td>
+            <td>{{ iha?.max_flight_time }}</td>
+            <td>{{ iha?.max_range }}</td>
+            <td>{{ iha?.battery_capacity }}</td>
+            <td>{{ getCategoryName(iha?.category) }}</td>
+            <td>
+              <button
+                [ngClass]="isrented(iha) ? 'btn-info' : 'btn-success'"
+                class="btn btn-sm ms-1"
+                (click)="rent(iha)"
+              >
+                Kirala<span *ngIf="isrented(iha)">ndı</span>
+              </button>
+            </td>
+            <td *ngIf="rentalList?.length">
+              <span style="font-size: 0.9rem; font-weight: 500">
+                {{ getRentInfo(iha)?.start_date | date: "d/M/yy, h:mm a" }}
+                -
+                {{ getRentInfo(iha)?.end_date | date: "d/M/yy, h:mm a" }}
+              </span>
+            </td>
+            <td>
+              <button
+                class="btn btn-sm btn-warning ms-1"
+                (click)="updateIha(iha)"
+              >
+                Update
+              </button>
+              <button
+                class="btn btn-sm btn-danger ms-1"
+                (click)="deleteIha(iha)"
+              >
+                x
+              </button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

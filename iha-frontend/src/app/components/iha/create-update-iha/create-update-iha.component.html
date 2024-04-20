@@ -1,0 +1,82 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h3 class="mb-4 text-center text-uppercase">
+    {{ updatemode ? "Update IHA" : "Create IHA" }}
+  </h3>
+  <hr />
+  <div class="my-3">
+    <label class="form-label fw-semibold">Brand</label>
+    <input formControlName="brand" type="text" class="form-control" />
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Model</label>
+    <input type="text" class="form-control" formControlName="model" />
+  </div>
+  <div class="mb-3">
+    <div class="row">
+      <label class="form-label fw-semibold">Category</label>
+      <div class="col-auto flex-grow-1">
+        <p-dropdown
+          [options]="categories"
+          formControlName="category"
+          optionLabel="name"
+          styleClass="w-100"
+          optionValue="id"
+        ></p-dropdown>
+      </div>
+
+      <div class="col-auto">
+        <button
+          type="button"
+          (click)="showCategories()"
+          class="btn btn-primary"
+        >
+          Categories
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Weight</label>
+    <input
+      type="number"
+      min="1"
+      class="form-control"
+      formControlName="weight"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Max Flight Time</label>
+    <input
+      type="number"
+      min="1"
+      class="form-control"
+      formControlName="max_flight_time"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Max Range</label>
+    <input
+      type="number"
+      min="1"
+      class="form-control"
+      formControlName="max_range"
+    />
+  </div>
+  <div class="mb-3">
+    <label class="form-label fw-semibold">Battery Capacity</label>
+    <input
+      type="number"
+      min="1"
+      class="form-control"
+      formControlName="battery_capacity"
+    />
+  </div>
+  <button
+    [ngClass]="updatemode ? 'btn-warning' : 'btn-primary'"
+    class="btn w-100"
+    [disabled]="form.invalid"
+    type="submit"
+  >
+    {{ updatemode ? "Update" : "Create" }}
+  </button>
+</form>

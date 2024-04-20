@@ -1,0 +1,26 @@
+<div class="container-fluid min-vh-100">
+  <div class="row justify-content-center align-items-center min-vh-100">
+    <div class="col-md-4">
+      <div class="card p-5 rounded shadow-md">
+        <h4 class="text-center" style="font-size: 22.5px">
+          BAYKAR İha Kiralama Platformu Giriş
+        </h4>
+        <p class="text-center mt-2">
+          <span class="text-muted">Üye Değil Misiniz?</span
+          ><a class="ms-2" routerLink="sign-up" style="text-decoration: none"
+            >Hesap Oluştur</a
+          >
+        </p>
+        <div class="my-3">
+          <label class="form-label fw-semibold">Username</label>
+          <input [(ngModel)]="username" type="text" class="form-control" />
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-semibold">Password</label>
+          <input type="password" class="form-control" [(ngModel)]="password" />
+        </div>
+        <button class="btn btn-primary w-100" (keyup.enter)="login()" (click)="login()">GİRİŞ</button>
+      </div>
+    </div>
+  </div>
+</div>

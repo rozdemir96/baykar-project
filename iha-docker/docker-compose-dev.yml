@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  iha-db-dev:
+    container_name: iha-db-dev-container
+    image: postgres
+    environment:
+      POSTGRES_USER: ihaDevUser
+      POSTGRES_PASSWORD : Dev_PaSSw0rd
+      POSTGRES_DB: IHA_DEV
+    ports:
+      - "5435:5432"
+    volumes:
+      - ./iha_exposed_config/postgis-custom-config.sh:/docker-entrypoint-initdb.d/postgis-custom-config.sh
+      - ./iha_exposed_config/postgis-custom-config.sql:/docker-entrypoint-initdb.d/postgis-custom-config.sql
+    networks:
+      iha-net-dev:
+        ipv4_address: 162.25.0.5
+
+  iha-pgadmin-dev:
+    image: dpage/pgadmin4:4.29
+    container_name: iha-pgadmin-dev
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@iha.com.tr
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_LISTEN_PORT: 80
+    ports:
+      - "8088:80"
+    networks:
+      iha-net-dev:
+        ipv4_address: 162.25.0.6
+
+  # docker yönetimi için kullanılacak bir görsel arayüz sunar. 'admin' kullanıcısıyla veya yeni kullanıcı açılarak,
+  # yerelde ve remote'da bulunan docker servisleri üzerinde kontroller sağlanabilir.
+  iha-container-manager-dev-01:
+    image: portainer/portainer-ce
+    container_name: iha-container-manager-dev-01
+    restart: always
+    ports:
+      - "18000:8000"
+      - "19000:9000"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      admin-password: admin@iha.com.tr
+    networks:
+      iha-net-dev:
+        ipv4_address: 162.25.0.12         
+
+networks:
+  iha-net-dev:
+    name: iha-net-dev
+    ipam:
+      driver: default
+      config:
+        - subnet: 162.25.0.0/16
+          gateway: 162.25.0.1

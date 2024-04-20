@@ -1,0 +1,45 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    gap: 10rem 0;
+    align-items: center;
+  "
+>
+  <table style="width: 100%; border: 1px solid black">
+    <tr>
+      <th>Marka</th>
+      <th>Model</th>
+      <th>Kategori</th>
+      <th>Ağırlık</th>
+      <th>İşlemler</th>
+    </tr>
+    <tr *ngFor="let iha of allIhas">
+      <td>{{ iha.id }}</td>
+      <td>{{ iha.brand }}</td>
+      <td>{{ iha.model }}</td>
+      <td>{{ iha.category }}</td>
+      <td>{{ iha.weight }}</td>
+      <input type="date" />
+      <input type="date" />
+      <button (click)="rent(iha)">Kirala</button>
+    </tr>
+  </table>
+
+  <table style="width: 100%; border: 1px solid black">
+    <tr>
+      <th>Id</th>
+      <th>Başlangıç Tarihi</th>
+      <th>Bitiş Tarihi</th>
+      <th>Kullanıcı</th>
+      <th>İşlemler</th>
+    </tr>
+    <tr *ngFor="let iha of rentedIhas">
+      <td>{{ iha.id }}</td>
+      <td>{{ iha.start_date | date }}</td>
+      <td>{{ iha.end_date | date }}</td>
+      <td>{{ iha.user }}</td>
+      <button (click)="delete(iha.id)">Sil</button>
+    </tr>
+  </table>
+</div>
